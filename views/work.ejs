@@ -1,0 +1,62 @@
+<%- include ("partials/header.ejs") %>
+
+<div class="container">
+    <div class="head-topic">
+        <h1 class="topic"> Work List </h1>
+    </div>
+
+    <div class = "header">
+        <p class="date"> <%= dayname %> , <%= new Date().toLocaleDateString() %> </p>
+        <form action="/submit" method="post">
+            <button type="submit" id="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#283149" class="bi bi-calendar3" viewBox="0 0 16 16">
+                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg>
+            </button>
+            
+        </form>
+        
+        <form action="/work" method="post">
+            <button type="submit" id="work" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#283149" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
+                </svg>
+            </button>
+            
+        </form>
+    </div>
+
+    <div class = "main">
+        <form action="/add2" method="post" style="display: inline-flex;">
+            <input type="text" name="wName" placeholder="New Task" autocomplete="off" required class="custom-file-input" >
+            <div class="bt">
+                <button type="submit" id="add" name="list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="#35155D" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+
+        <div class="task-area">
+            
+            <% newWorkItems.forEach((items) => { %>
+            <form action="/deletework" method="post">
+                <div class="usertask">
+                <input type = "checkbox" class="checkbox check" name="checkbox" value="<%= items.id %>" onchange="this.form.submit()">
+                <label id="text<%= items.name %>" class="t">
+                    <%= items.name %>
+                </label>
+                </div>
+            </form>
+            <% }); %>
+                
+        </div>
+
+    </div>
+
+</div>
+
+<%- include ("partials/footer.ejs") %>
